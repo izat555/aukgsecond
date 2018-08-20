@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:actionBarSize"
+    android:id="@+id/custom_toolbar"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:background="@color/colorPrimary">
+
+    <ImageButton
+        android:id="@+id/ib_toolbar"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/eight_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:actionBarSize" />
+</android.support.v7.widget.Toolbar>

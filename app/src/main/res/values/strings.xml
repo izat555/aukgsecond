@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">AU.kg Second</string>
+
+    <string name="add_prof">Добавить профессию</string>
+    <string name="add_to_fav">Добавлено в Избранное</string>
+    <string name="all_vacancies_in_kg">Все вакансии Кыргызстана</string>
+    <string name="btn_search">Найти</string>
+    <string name="call">Позвонить</string>
+    <string name="cancel">Отмена</string>
+    <string name="categories">Категории</string>
+    <string name="categories_tag">categories</string>
+    <string name="date">Date</string>
+    <string name="day_vacancies">Вакансии за сутки</string>
+    <string name="del_form_fav">Удалено из Избранное</string>
+    <string name="description">Description</string>
+    <string name="dialog_search_hint">Поиск</string>
+    <string name="favorites">Избранные вакансии</string>
+    <string name="job_time_tag">job_time</string>
+    <string name="my_log">MY_LOG</string>
+    <string name="negotiation">Договорная</string>
+    <string name="next">Следующее</string>
+    <string name="title_vacancies">Вакансии</string>
+    <string name="salary">Salary</string>
+    <string name="salary_and_job_time">Оклад и Режим работы:</string>
+    <string name="search">Поиск</string>
+    <string name="suitable_vacancies">Подходящие</string>
+    <string name="parameters_tag">parameters</string>
+    <string name="position">position</string>
+    <string name="previous">Предыдущее</string>
+    <string name="profession">profession</string>
+    <string name="prof_dialog_hint">Сохраните профессию, чтобы получать подходящие специально для вас вакансии</string>
+    <string name="prof_hint">Чтобы получать подходящие вакансии, необходимо ввести профессию</string>
+    <string name="prof_tag">prof</string>
+    <string name="rubric_list_tag">rubric_list_tag</string>
+    <string name="rubric_tag">rubric</string>
+    <string name="salary_tag">salary</string>
+    <string name="save">Сохранить</string>
+    <string name="term_tag">term</string>
+    <string name="vacancy_list">vacancy_list</string>
+    <string name="vacancy_models">vacancy_models</string>
+    <string name="dialog_tag">DIALOG</string>
+    <string name="no_data">No data.</string>
+
+    <string-array name="drawer_item_titles">
+        <item>Поиск</item>
+        <item>Избранные вакансии</item>
+        <item>Выход</item>
+    </string-array>
+</resources>

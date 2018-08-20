@@ -1,0 +1,7 @@
+ext {
+    versions = [
+            compileSdk: 27,
+            targetSdk: 27,
+            minSdk: 15,
+    ]
+}

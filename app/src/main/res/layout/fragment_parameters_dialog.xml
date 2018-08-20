@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_job_time"
+        android:layout_alignParentTop="true"
+        android:text="Режим работы"
+        android:textSize="@dimen/twenty_two_sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorDarkGrey"
+        android:padding="@dimen/eight_dp"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.example.labtwoausecondversion.ui.parameters.RadioButtonGroupGridLayout
+        android:layout_below="@id/tv_job_time"
+        android:id="@+id/rbggl_job_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:layout_marginTop="@dimen/eight_dp"
+        android:layout_marginBottom="@dimen/eight_dp"
+        android:columnCount="2"
+        android:rowCount="3">
+
+        <RadioButton
+            android:id="@+id/rb_job_time_any"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="Любой"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_job_time_remotely"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="Удаленно"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_job_time_full"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="Полный день"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_job_time_night"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="Ночной"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_job_time_flexible"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="Гибкий"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.example.labtwoausecondversion.ui.parameters.RadioButtonGroupGridLayout>
+
+    <TextView
+        android:layout_below="@+id/rbggl_job_time"
+        android:id="@+id/tv_salary"
+        android:text="Оклад"
+        android:textSize="@dimen/twenty_two_sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorDarkGrey"
+        android:padding="@dimen/eight_dp"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.example.labtwoausecondversion.ui.parameters.RadioButtonGroupGridLayout
+        android:layout_below="@id/tv_salary"
+        android:id="@+id/rbggl_salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:layout_marginTop="@dimen/eight_dp"
+        android:layout_marginBottom="@dimen/eight_dp"
+        android:columnCount="2"
+        android:rowCount="2">
+
+        <RadioButton
+            android:id="@+id/rb_salary_any"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="Любой"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_salary_five_more"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="5000 +"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_salary_ten_more"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="10 000 +"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_salary_thirty_more"
+            android:layout_columnWeight="1"
+            android:layout_gravity="left"
+            android:text="30 000 +"
+            android:textSize="@dimen/eighteen_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.example.labtwoausecondversion.ui.parameters.RadioButtonGroupGridLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/rbggl_salary"
+        android:layout_marginTop="@dimen/eight_dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_weight="0.5"
+            android:text="Сброс"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="@dimen/eighteen_sp"
+            android:background="@drawable/background_prof_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_ready"
+            android:layout_weight="0.5"
+            android:text="Готово"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="@dimen/eighteen_sp"
+            android:background="@drawable/background_prof_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
