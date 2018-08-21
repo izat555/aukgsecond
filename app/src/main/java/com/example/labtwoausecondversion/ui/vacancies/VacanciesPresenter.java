@@ -20,7 +20,7 @@ public class VacanciesPresenter implements VacanciesContract.Presenter {
 
     public VacanciesPresenter(ResourceHelper resourceHelper) {
         mResourceHelper = resourceHelper;
-        mSQLiteHelper = new SQLiteHelper(mResourceHelper.getContext());
+        mSQLiteHelper = AuApp.get(mResourceHelper.getContext()).getSQLiteHelper();
     }
 
     @Override
@@ -87,5 +87,10 @@ public class VacanciesPresenter implements VacanciesContract.Presenter {
     @Override
     public void deleteFavoriteVacancy(String pid) {
         mSQLiteHelper.deleteSingleVacancy(pid);
+    }
+
+    @Override
+    public void saveLastVacancies(List<VacancyModel> vacancyModels) {
+        mSQLiteHelper.saveLastVacancies(vacancyModels);
     }
 }

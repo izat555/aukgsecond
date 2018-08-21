@@ -33,7 +33,7 @@ public class SuitablePresenter implements SuitableContract.Presenter {
     public SuitablePresenter(ResourceHelper resourceHelper) {
         mResourceHelper = resourceHelper;
         if (mResourceHelper != null) {
-            mSQLiteHelper = new SQLiteHelper(mResourceHelper.getContext());
+            mSQLiteHelper = AuApp.get(mResourceHelper.getContext()).getSQLiteHelper();
             mPreferencesHelper = new PreferencesHelper(mResourceHelper.getContext());
         }
     }
@@ -102,5 +102,10 @@ public class SuitablePresenter implements SuitableContract.Presenter {
 
     public void saveProfessionName(String professionName) {
         mPreferencesHelper.saveProfessionName(professionName);
+    }
+
+    @Override
+    public void saveLastSuitable(List<VacancyModel> vacancyModels) {
+        mSQLiteHelper.saveLastSuitable(vacancyModels);
     }
 }

@@ -8,12 +8,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.labtwoausecondversion.R;
 import com.example.labtwoausecondversion.config.AppConstants;
+import com.example.labtwoausecondversion.config.InternetUtils;
 import com.example.labtwoausecondversion.data.ResourceHelper;
 import com.example.labtwoausecondversion.data.entity.VacancyModel;
 import com.example.labtwoausecondversion.ui.IRecyclerViewClickCallback;
@@ -23,6 +25,7 @@ import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 import com.victor.loading.rotate.RotateLoading;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,7 +71,16 @@ public class VacanciesFragment extends Fragment implements VacanciesContract.Vie
         mPresenter = new VacanciesPresenter(new ResourceHelper(getContext()));
         mPresenter.bind(this);
         mPage = 1;
-        mPresenter.getVacancies(mPage);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ArrayList<VacancyModel> vacancyModels = getArguments().getParcelableArrayList(getString(R.string.vacancy_list));
+            mAdapter = new VacanciesAdapter(new ResourceHelper(getContext()), vacancyModels, this);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(mAdapter);
+        } else {
+            mPresenter.getVacancies(mPage);
+        }
         return view;
     }
 
@@ -87,6 +99,8 @@ public class VacanciesFragment extends Fragment implements VacanciesContract.Vie
                 mAdapter.addVacancyModels(vacancyModels);
                 mAdapter.notifyDataSetChanged();
             }
+            mPage++;
+            mPresenter.saveLastVacancies(vacancyModels);
         }
     }
 
@@ -133,9 +147,13 @@ public class VacanciesFragment extends Fragment implements VacanciesContract.Vie
             swipyRefreshLayout.post(new Runnable() {
                 @Override
                 public void run() {
-                    mPage++;
-                    mPresenter.getVacancies(mPage);
-                    swipyRefreshLayout.setRefreshing(false);
+                    if (InternetUtils.isInternetConnected(getContext())) {
+                        mPresenter.getVacancies(mPage);
+                        swipyRefreshLayout.setRefreshing(false);
+                    } else {
+                        Snackbar.make(recyclerView, getString(R.string.no_internet_connection), Snackbar.LENGTH_LONG).show();
+                        swipyRefreshLayout.setRefreshing(false);
+                    }
                 }
             });
         }

@@ -17,5 +17,6 @@ public interface VacanciesContract {
         void getVacancies(int page);
         void saveFavoriteVacancy(VacancyModel vacancyModel);
         void deleteFavoriteVacancy(String pid);
+        void saveLastVacancies(List<VacancyModel> vacancyModels);
     }
 }

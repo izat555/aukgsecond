@@ -16,14 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.labtwoausecondversion.R;
+import com.example.labtwoausecondversion.config.InternetUtils;
 import com.example.labtwoausecondversion.data.ResourceHelper;
 import com.example.labtwoausecondversion.ui.IDialogCallback;
 import com.example.labtwoausecondversion.ui.parameters.ParametersDialog;
 import com.example.labtwoausecondversion.ui.rubrics.RubricsDialog;
 import com.example.labtwoausecondversion.ui.search_result.SearchResultActivity;
 import com.victor.loading.rotate.RotateLoading;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -164,18 +163,22 @@ public class SearchActivity extends AppCompatActivity implements IDialogCallback
                     break;
                 case R.id.btn_search:
                     if (TextUtils.isEmpty(etSearch.getText().toString())) {
-                        Snackbar.make(btnSearch, "Enter something", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(btnSearch, getString(R.string.enter_profession), Snackbar.LENGTH_LONG).show();
                     } else if (!TextUtils.isEmpty(etSearch.getText().toString())){
-                        String search = etSearch.getText().toString();
-                        String jobTime = tvChosenJobTime.getText().toString();
-                        String salary = tvChosenSalary.getText().toString();
-                        String rubric = tvChosenCategory.getText().toString();
-                        Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                        intent.putExtra(getString(R.string.prof_tag), search);
-                        intent.putExtra(getString(R.string.rubric_tag), rubric);
-                        intent.putExtra(getString(R.string.salary_tag), salary);
-                        intent.putExtra(getString(R.string.term_tag), jobTime);
-                        startActivity(intent);
+                        if (InternetUtils.isInternetConnected(SearchActivity.this)) {
+                            String search = etSearch.getText().toString();
+                            String jobTime = tvChosenJobTime.getText().toString();
+                            String salary = tvChosenSalary.getText().toString();
+                            String rubric = tvChosenCategory.getText().toString();
+                            Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                            intent.putExtra(getString(R.string.prof_tag), search);
+                            intent.putExtra(getString(R.string.rubric_tag), rubric);
+                            intent.putExtra(getString(R.string.salary_tag), salary);
+                            intent.putExtra(getString(R.string.term_tag), jobTime);
+                            startActivity(intent);
+                        } else {
+                            Snackbar.make(btnSearch, getString(R.string.no_internet_connection), Snackbar.LENGTH_LONG).show();
+                        }
                     }
                     break;
             }

@@ -4,6 +4,7 @@ import com.example.labtwoausecondversion.data.entity.VacancyModel;
 import com.example.labtwoausecondversion.ui.ILifeCycle;
 import com.example.labtwoausecondversion.ui.IProgressBar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface SuitableContract {
@@ -16,5 +17,6 @@ public interface SuitableContract {
         void getVacancies(int page);
         void saveFavoriteVacancy(VacancyModel vacancyModel);
         void deleteFavoriteVacancy(String pid);
+        void saveLastSuitable(List<VacancyModel> vacancyModels);
     }
 }

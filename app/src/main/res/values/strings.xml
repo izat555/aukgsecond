@@ -14,11 +14,15 @@
     <string name="del_form_fav">Удалено из Избранное</string>
     <string name="description">Description</string>
     <string name="dialog_search_hint">Поиск</string>
+    <string name="dialog_tag">DIALOG</string>
+    <string name="enter_profession">Введите профессию</string>
     <string name="favorites">Избранные вакансии</string>
     <string name="job_time_tag">job_time</string>
     <string name="my_log">MY_LOG</string>
     <string name="negotiation">Договорная</string>
     <string name="next">Следующее</string>
+    <string name="no_data">No data.</string>
+    <string name="no_internet_connection">No Internet Connection</string>
     <string name="title_vacancies">Вакансии</string>
     <string name="salary">Salary</string>
     <string name="salary_and_job_time">Оклад и Режим работы:</string>
@@ -35,11 +39,10 @@
     <string name="rubric_tag">rubric</string>
     <string name="salary_tag">salary</string>
     <string name="save">Сохранить</string>
+    <string name="suitable_list">suitable_list</string>
     <string name="term_tag">term</string>
     <string name="vacancy_list">vacancy_list</string>
     <string name="vacancy_models">vacancy_models</string>
-    <string name="dialog_tag">DIALOG</string>
-    <string name="no_data">No data.</string>
 
     <string-array name="drawer_item_titles">
         <item>Поиск</item>

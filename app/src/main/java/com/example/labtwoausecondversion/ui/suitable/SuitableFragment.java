@@ -7,7 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.example.labtwoausecondversion.R;
 import com.example.labtwoausecondversion.config.AppConstants;
+import com.example.labtwoausecondversion.config.InternetUtils;
 import com.example.labtwoausecondversion.data.ResourceHelper;
 import com.example.labtwoausecondversion.data.entity.VacancyModel;
 import com.example.labtwoausecondversion.ui.IDialogCallback;
@@ -26,6 +26,7 @@ import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 import com.victor.loading.rotate.RotateLoading;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -69,7 +70,6 @@ public class SuitableFragment extends Fragment implements SuitableContract.View,
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d(getString(R.string.my_log), "SuitableFragment onCreateView");
         View view = inflater.inflate(R.layout.fragment_vacancies, container, false);
         mUnbinder = ButterKnife.bind(this, view);
         swipyRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
@@ -79,7 +79,16 @@ public class SuitableFragment extends Fragment implements SuitableContract.View,
         mDialogCallback = (IDialogCallback) getContext();
         mPresenter.bind(this);
         mPage = 1;
-        mPresenter.getVacancies(mPage);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            ArrayList<VacancyModel> suitableModels = getArguments().getParcelableArrayList(getString(R.string.suitable_list));
+            mAdapter = new VacanciesAdapter(new ResourceHelper(getContext()), suitableModels, this);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(mAdapter);
+        } else {
+            mPresenter.getVacancies(mPage);
+        }
         return view;
     }
 
@@ -89,14 +98,21 @@ public class SuitableFragment extends Fragment implements SuitableContract.View,
             relativeLayout.setVisibility(View.GONE);
         }
 
-        if (vacancyModels != null && mPage == 1) {
-            mAdapter = new VacanciesAdapter(new ResourceHelper(getContext()), vacancyModels, this);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(mAdapter);
-        } else if (vacancyModels != null && mPage > 1) {
-            mAdapter.addVacancyModels(vacancyModels);
-            mAdapter.notifyDataSetChanged();
+        if (vacancyModels != null) {
+            if (mPage == 1) {
+                if (recyclerView.getAdapter() != null) {
+                    recyclerView.setAdapter(null);
+                }
+                mAdapter = new VacanciesAdapter(new ResourceHelper(getContext()), vacancyModels, this);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setAdapter(mAdapter);
+            } else if (mPage > 1) {
+                mAdapter.addVacancyModels(vacancyModels);
+                mAdapter.notifyDataSetChanged();
+            }
+            mPage++;
+            mPresenter.saveLastSuitable(vacancyModels);
         }
     }
 
@@ -154,9 +170,13 @@ public class SuitableFragment extends Fragment implements SuitableContract.View,
             swipyRefreshLayout.post(new Runnable() {
                 @Override
                 public void run() {
-                    mPage++;
-                    mPresenter.getVacancies(mPage);
-                    swipyRefreshLayout.setRefreshing(false);
+                    if (InternetUtils.isInternetConnected(getContext())) {
+                        mPresenter.getVacancies(mPage);
+                        swipyRefreshLayout.setRefreshing(false);
+                    } else {
+                        Snackbar.make(recyclerView, getString(R.string.no_internet_connection), Snackbar.LENGTH_LONG).show();
+                        swipyRefreshLayout.setRefreshing(false);
+                    }
                 }
             });
         }

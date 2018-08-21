@@ -6,12 +6,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.labtwoausecondversion.R;
 import com.example.labtwoausecondversion.config.AppConstants;
 import com.example.labtwoausecondversion.data.entity.TabItemModel;
+import com.example.labtwoausecondversion.data.entity.VacancyModel;
 import com.example.labtwoausecondversion.ui.IDialogCallback;
 import com.example.labtwoausecondversion.ui.adapter.CustomPagerAdapter;
 import com.example.labtwoausecondversion.ui.drawer.CustomDrawer;
@@ -61,6 +63,20 @@ public class MainActivity extends CustomDrawer implements IDialogCallback {
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        ArrayList<VacancyModel> vacancyModels = getIntent().getParcelableArrayListExtra(getString(R.string.vacancy_list));
+        ArrayList<VacancyModel> suitableModels = getIntent().getParcelableArrayListExtra(getString(R.string.suitable_list));
+        if (vacancyModels != null) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(getString(R.string.vacancy_list), vacancyModels);
+            mCustomPagerAdapter.getItem(0).setArguments(bundle);
+        }
+
+        if (suitableModels != null) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(getString(R.string.suitable_list), suitableModels);
+            mCustomPagerAdapter.getItem(1).setArguments(bundle);
+        }
     }
 
     private ArrayList<TabItemModel> getTabItemModels() {
